@@ -61,9 +61,20 @@ Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
     Route::post('/pos', [PosController::class, 'store'])->name('pos.store');
 });
 
+Route::get('/history', function () {
+    return 'Riwayat Transaksi Saya';
+})->name('history');
+    
 Route::resource('users', UserController::class)
     ->middleware(['auth', 'role:admin']);
 
-
-
+// Praktikum 5
+Route::get('/index', function(){
+    $posts=[
+        (object)['title' => 'Evan Keren','content' => 'Content for Post 1', 'published' => true,],
+        (object)['title' => 'Evan Kece','content' => 'Content for Post 2', 'published' => true,],
+        (object)['title' => 'Evan Keren dan Kece','content' => 'Content for Post 3', 'published' => true,],
+    ];
+    return view('posts.index',compact('posts'));
+});
 
