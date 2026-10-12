@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 // Materi 2
 
@@ -50,8 +51,7 @@ Route::post('/logout', [LoginController::class, 'destroy'])
     ->name('logout');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/categories', [CategoryController::class, 'index'])
-        ->name('categories.index');
+    Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
     Route::get('/reports/sales', [ReportController::class, 'sales'])->name('report.sales');
 });
@@ -64,11 +64,11 @@ Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
 Route::get('/history', function () {
     return 'Riwayat Transaksi Saya';
 })->name('history');
-    
+
 Route::resource('users', UserController::class)
     ->middleware(['auth', 'role:admin']);
 
-// Praktikum 5
+// Pertemuan 5
 Route::get('/index', function(){
     $posts=[
         (object)['title' => 'Evan Keren','content' => 'Content for Post 1', 'published' => true,],
