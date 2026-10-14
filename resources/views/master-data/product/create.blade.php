@@ -29,6 +29,7 @@
         <div>
             <label class="block text-sm font-medium text-gray-700">Harga</label>
             <input type="number" name="price" value="{{ old('price') }}" class="mt-1 block w-full rounded-md border-gray-300">
+            @error('price') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
         </div>
         <div>
             <label class="block text-sm font-medium text-gray-700">Stok Awal</label>

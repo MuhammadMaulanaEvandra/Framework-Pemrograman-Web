@@ -19,7 +19,7 @@ class StoreProductRequest extends FormRequest
             'code' => 'required|string|max:20|unique:products,code',
             'name' => 'required|string|max:150',
             'unit' => 'required|string|max:20',
-            'price' => 'required|integer|min:0',
+            'price' => 'required|integer|min:1',
             'stock' => 'required|integer|min:0',
         ];
     }
@@ -28,6 +28,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'code.unique' => 'Kode produk sudah digunakan, gunakan kode lain.',
+            'price.min'   => 'Harga harus lebih dari 0.',
         ];
     }
 }
