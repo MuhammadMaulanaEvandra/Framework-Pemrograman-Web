@@ -33,4 +33,24 @@ class Product extends Model
         );
     }
 
+    protected function stockValue(): Attribute
+    {
+        return Attribute::get(fn () => $this->stock * $this->price);
+    }
+
+    protected function stockStatus(): Attribute
+    {
+        return Attribute::get(function () {
+            if ($this->stock == 0) {
+                return 'Habis';
+            }
+
+            if ($this->stock < config('inventory.low_stock_threshold')) {
+                return 'Menipis';
+            }
+
+            return 'Aman';
+        });
+    }
+
 }

@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
         \DB::table('products')->insert([
             [
                 'category_id' => 1,
-                'code' => 'P001',
+                'code' => 'P003',
                 'name' => 'Product 1',
                 'unit' => 'pcs',
                 'price' => 10000,
@@ -33,7 +33,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'category_id' => 3,
-                'code' => 'P003',
+                'code' => 'P001',
                 'name' => 'Product 3',
                 'unit' => 'pcs',
                 'price' => 15000,

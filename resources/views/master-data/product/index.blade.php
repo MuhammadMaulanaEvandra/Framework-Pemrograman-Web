@@ -25,12 +25,13 @@
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Kategori</th>
                             <th class="px-4 py-2 text-right text-xs font-medium text-gray-500">Harga</th>
                             <th class="px-4 py-2 text-center text-xs font-medium text-gray-500">Stok</th>
+                            <th class="px-4 py-2 text-right text-xs font-medium text-gray-500">Nilai Stok</th>
                             <th class="px-4 py-2 text-center text-xs font-medium text-gray-500">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
                         @forelse ($products as $product)
-                            <tr class="@if ($product->stock == 0) bg-red-50 @elseif ($product->stock < 10) bg-yellow-50 @endif">
+                            <tr class="@if ($product->stock_status === 'Habis') bg-red-50 @elseif ($product->stock_status === 'Menipis') bg-yellow-50 @endif">
                                 <td class="px-4 py-2 text-sm">{{ $product->code }}</td>
                                 <td class="px-4 py-2 text-sm">{{ $product->name }}</td>
                                 <td class="px-4 py-2 text-sm">{{ $product->category->name }}</td>
@@ -39,11 +40,12 @@
                                 </td>
                                 <td class="px-4 py-2 text-sm text-center font-semibold">
                                     {{ $product->stock }}
-                                    @if ($product->stock == 0)
-                                        <span class="text-red-600 text-xs block">Habis</span>
-                                    @elseif ($product->stock < 10)
-                                        <span class="text-yellow-600 text-xs block">Menipis</span>
-                                    @endif
+                                    <div class="mt-1">
+                                        <x-badge :status="$product->stock_status" />
+                                    </div>
+                                </td>
+                                <td class="px-4 py-2 text-sm text-right">
+                                    Rp{{ number_format($product->stock_value, 0, ',', '.') }}
                                 </td>
                                 <td class="px-4 py-2 text-sm text-center space-x-2">
                                     <a href="{{ route('products.edit', $product) }}" class="text-indigo-600">Ubah</a>
@@ -51,7 +53,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="px-4 py-6 text-center text-gray-500">
+                                <td colspan="7" class="px-4 py-6 text-center text-gray-500">
                                     Belum ada data produk.
                                 </td>
                             </tr>
