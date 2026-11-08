@@ -20,22 +20,7 @@
                     Selamat datang, {{ auth()->user()->name }}.
                 </p>
             </x-card>
-
-            {{-- Card Latihan Nomor 1 --}}
-            <x-card>
-                <h3 class="text-lg font-semibold mb-4">
-                    Status Stok
-                </h3>
-
-                <div class="flex gap-3">
-                    <x-badge status="Aman" />
-                    <x-badge status="Menipis" />
-                    <x-badge status="Habis" />
-                </div>
-            </x-card>
-
         </div>
-
     </div>
 
 </x-app-layout>
